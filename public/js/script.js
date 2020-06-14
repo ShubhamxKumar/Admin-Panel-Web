@@ -1,0 +1,66 @@
+$(window).scroll(function () {
+  $scr = $(window).scrollTop();
+  $("#main_image img").css({
+    width: 100 + $scr / 5 + "%",
+    height: 100 + $scr / 4 + "%",
+  });
+});
+
+$(function () {
+  let userlist = $("#user_list");
+  let userbtn = $("#userbtn");
+  let orderbtn = $("#orderbtn");
+
+  userbtn.click(function () {
+    userbtn.removeClass("btn-light");
+    userbtn.addClass("btn-dark");
+    orderbtn.removeClass("btn-dark");
+    orderbtn.addClass("btn-light");
+    console.log("User btn working");
+  });
+
+  orderbtn.click(function () {
+    userbtn.removeClass("btn-dark");
+    userbtn.addClass("btn-light");
+    orderbtn.removeClass("btn-light");
+    orderbtn.addClass("btn-dark");
+    console.log("order working ....");
+  });
+
+  $.get("/api/users", function (response) {
+    userlist.empty();
+    /* for (user of response) {
+      userlist.append(`<div class="col-3 mb-3">
+      <div class="card usercard m-3 p-1">
+          <div class="card-body p-0">
+              <div class="container service_container"><h1 align="center" id="service_icons"> <span class="fa fa-money"></span> </h1></div>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Name:</b>  ${user['name']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Email:</b>  ${user['email']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Phone:</b>  ${user['phone']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Landmark:</b>  ${user['lanmark']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>City:</b>  ${user['city']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Pincode:</b>  ${user['pincode']}</p>
+            </div>
+      </div>
+  </div>`);
+    } */
+
+    for (var i = response.length - 1; i >= 0; i--) {
+      console.log(i);
+      userlist.append(`<div class="col-3 mb-3">
+      <div class="card usercard m-3 p-1">
+          <div class="card-body p-0">
+              <div class="container service_container"><h1 align="center" id="service_icons"> <span class="fa fa-money"></span> </h1></div>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>User_index:</b>  ${i}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Name:</b>  ${response[i]['name']}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Email:</b>  ${response[i]["email"]}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Phone:</b>  ${response[i]["phone"]}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Landmark:</b>  ${response[i]["lanmark"]}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>City:</b>  ${response[i]["city"]}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Pincode:</b>  ${response[i]["pincode"]}</p>
+            </div>
+      </div>
+  </div>`);
+    }
+  });
+});
