@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const server = express();
 const path = require('path');
 
+server.set('view engine', 'hbs');
+server.set('views', path.join(__dirname, '/views'))
+
 const apiRoute = require('./routes/API/index.js')
 
 server.use(bodyParser.json());
