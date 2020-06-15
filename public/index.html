@@ -78,6 +78,12 @@
     </div>
 
     <div id="user-box" class="container-fluid">
+      <div class="container justify-content-center" style="width: 50vw;" id="order-finder" style="display: none;">
+        <form action="/api/order/" method="POST">
+        <input type="text" name="orderid" id="orderid" placeholder="Enter User Id..." class="form-control">
+        <h1 align="center"><button type="submit" class="btn btn-primary my-2" id="findorderbtn">Find User</button></h1>
+        </form>
+      </div>
       <div class="row justify-content-center" id="user_list">
         <div class="col-3 mb-3">
           <div class="card usercard m-3 p-1">

@@ -14,6 +14,10 @@ server.use(bodyParser.urlencoded({extended:true}));
 
 server.use('/', express.static(path.join(__dirname, '/public')))
 server.use('/api', apiRoute.route);
+server.get('/download/:id', function(req, res){
+    let id = req.params.id;
+    res.download(`./${id}.xlsx`);
+})
 
 const port = process.env.PORT || 3000;
 

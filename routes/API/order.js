@@ -2,6 +2,8 @@ const route = require("express").Router();
 const fetch = require("node-fetch");
 const axios = require("axios");
 const { response } = require("express");
+const json2xls = require("json2xls");
+const fs = require("fs");
 
 route.post("/", function (req, res) {
   let id = req.body.orderid;
@@ -27,6 +29,22 @@ route.post("/", function (req, res) {
             })
             .then(function (json) {
               var item = json["response"].find((obj) => obj.order_id == id);
+              list.push({
+                name: item.customer_name,
+                phone: item.mobile_number,
+                add1: item.add1,
+                add2: item.add2,
+                landmark: item.landmark,
+                pincode: item.pincode,
+              });
+              console.log(list);
+              var xls = json2xls(list);
+              fs.writeFileSync(`${id}.xlsx`, xls, "binary", (err) => {
+                if (err) {
+                  console.log("writeFileSync :", err);
+                }
+                console.log(`${id}.xlsx` + " file is saved!");
+              });
               curstatus = item.status_of_order;
               console.log(`Current : ${curstatus}`);
               res.render("orderinfo", { id, list, curstatus });
@@ -51,12 +69,11 @@ route.post("/status", async function (req, res) {
     console.log(response.data);
     let id = req.body.id;
     let status = req.body.status;
-    res.render('status', {id, status});
+    res.render("status", { id, status });
   } catch (err) {
     console.log(err);
     res.send(err);
   }
-
 });
 
 exports = module.exports = { route };
