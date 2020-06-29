@@ -70,5 +70,9 @@
     box-shadow: 3px 4px 7px #888888;
 }
 
+.card.ordercard.m-3.p-1:hover{
+    cursor: pointer;
+}
+
 
 

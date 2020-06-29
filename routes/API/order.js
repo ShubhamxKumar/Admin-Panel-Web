@@ -5,8 +5,8 @@ const { response } = require("express");
 const json2xls = require("json2xls");
 const fs = require("fs");
 
-route.post("/", function (req, res) {
-  let id = req.body.orderid;
+route.get("/", function (req, res) {
+  let id = req.query.orderid;
   let curstatus = "";
   if (!id || id.length == 0) {
     res.send("No Order Id was Provided!!!");

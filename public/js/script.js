@@ -20,7 +20,6 @@ $(function () {
     console.log("User btn working");
     $("#order-box").hide();
     $("#user-box").show();
-    $("#order-finder").hide();
   });
 
   orderbtn.click(function () {
@@ -30,7 +29,6 @@ $(function () {
     orderbtn.addClass("btn-dark");
 
     $("#order-box").show();
-    $("#order-finder").show();
     $("#user-box").hide();
     console.log("order working ....");
     $.get("/api/orders", function (response) {
@@ -38,13 +36,43 @@ $(function () {
       orderlist.empty();
       for (var i = response.length - 1; i >= 0; i--) {
         orderlist.append(`<div class="col-3 mb-3">
-        <div class="card ordercard m-3 p-1">
+        <div class="card ordercard m-3 p-1" onclick="location.href='/api/order/?orderid=${response[i]["order_id"]}'">
           <div class="card-body p-0">
             <p
               class="card-text usercred_name p-0 m-0 text-left"
               align="center"
             >
               <b>Order_index:</b> ${i}
+            </p>
+            <p
+              class="card-text usercred_name p-0 m-0 text-left"
+              align="center"
+            >
+              <b>Customer Name:</b> ${response[i]["customer_name"]}
+            </p>
+            <p
+              class="card-text usercred_name p-0 m-0 text-left"
+              align="center"
+            >
+              <b>Mobile Number:</b> ${response[i]["mobile_number"]}
+            </p>
+            <p
+              class="card-text usercred_name p-0 m-0 text-left"
+              align="center"
+            >
+              <b>Add1:</b> ${response[i]["add1"]}
+            </p>
+            <p
+              class="card-text usercred_name p-0 m-0 text-left"
+              align="center"
+            >
+              <b>Add2:</b> ${response[i]["add2"]}
+            </p>
+            <p
+              class="card-text usercred_name p-0 m-0 text-left"
+              align="center"
+            >
+              <b>Landmark:</b> ${response[i]["landmark"]}
             </p>
             <p
               class="card-text usercred_name p-0 m-0 text-left"
@@ -111,6 +139,7 @@ $(function () {
           <div class="card-body p-0">
               <div class="container service_container"><h1 align="center" id="service_icons"> <span class="fa fa-money"></span> </h1></div>
               <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>User_index:</b>  ${i}</p>
+              <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>User_id:</b>  ${response[i]["user_id"]}</p>
               <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Name:</b>  ${response[i]["name"]}</p>
               <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Email:</b>  ${response[i]["email"]}</p>
               <p class="card-text usercred_name p-0 m-0 text-left" align="center"> <b>Phone:</b>  ${response[i]["phone"]}</p>

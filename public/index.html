@@ -25,12 +25,6 @@
     </div>
 
     <div id="order-box" class="container-fluid" style="display: none;">
-      <div class="container justify-content-center" style="width: 50vw;" id="order-finder" style="display: none;">
-        <form action="/api/order/" method="POST">
-        <input type="text" name="orderid" id="orderid" placeholder="Enter Order Id..." class="form-control">
-        <h1 align="center"><button type="submit" class="btn btn-primary my-2" id="findorderbtn">Manage Order</button></h1>
-        </form>
-      </div>
       <div class="row justify-content-center" id="order_list">
         <div class="col-3 mb-3">
           <div class="card ordercard m-3 p-1">
@@ -78,6 +72,12 @@
     </div>
 
     <div id="user-box" class="container-fluid">
+      <div class="container justify-content-center" style="width: 50vw;" id="user-finder">
+        <form action="/api/users/" method="POST">
+        <input type="text" name="userid" id="userid" placeholder="Enter User Id..." class="form-control">
+        <h1 align="center"><button type="submit" class="btn btn-primary my-2" id="finduserbtn">Get User Details</button></h1>
+        </form>
+      </div>
       <div class="row justify-content-center" id="user_list">
         <div class="col-3 mb-3">
           <div class="card usercard m-3 p-1">
